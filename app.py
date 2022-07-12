@@ -8,10 +8,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
 
-class ApiException(Exception):
-    pass
-
-
 def get_request():
     data = request.args
     if request.args == {}:
@@ -36,7 +32,7 @@ def perform_query():
     with open(file_path) as file:
         result = query(cmd1, value1, file)
         if cmd2 and value2:
-            result = query(cmd2, value2, file)
+            result = query(cmd2, value2, result)
         result = "\n".join(result)
 
     return app.response_class(result, content_type="text/plain")
